@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model nomeCompleto.tbl_nomeCompleto
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <div>
+        <label for="Nome">Nome:</label>
+        @Html.TextBoxFor(m => m.Nome)
+        @Html.ValidationMessageFor(m => m.Nome)
+    </div>
+
+    <div>
+        <label for="Nome_completo">Nome Completo:</label>
+        @Html.TextBoxFor(m => m.Nome_completo)
+        @Html.ValidationMessageFor(m => m.Nome_completo)
+    </div>
+
+
+    <input type="submit" value="Cadastrar" />
+}

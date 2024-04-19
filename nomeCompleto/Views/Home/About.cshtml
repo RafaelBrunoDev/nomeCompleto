@@ -1,0 +1,78 @@
+﻿@model List<tbl_nomeCompleto>
+
+<style>
+    /* Estilos da tabela */
+    .table-cadastros {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table-cadastros th, .table-cadastros td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table-cadastros th {
+            background-color: #f2f2f2;
+        }
+
+        .table-cadastros tr:hover {
+            background-color: #f5f5f5;
+        }
+</style>
+
+
+
+<h2>Nomes Cadastros</h2>
+<div>
+    <button type="button" id="btnAtualizarRegistros" class="btn btn-primary">Atualizar Registros</button>
+</div>
+<table class="table-cadastros">
+    <thead>
+
+
+
+        <tr>
+            <th>Nome</th>
+            <th>Nome Completo</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var nomeCompleto in Model)
+        {
+            <tr>
+                <td>@nomeCompleto.Nome</td>
+                <td>@nomeCompleto.Nome_completo</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $("#btnAtualizar").click(function () {
+            $.ajax({
+                url: '@Url.Action("AtualizarRegistros", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        alert(data.message);
+                        // Aqui você pode fazer alguma ação adicional após a atualização bem-sucedida
+                    } else {
+                        alert("Erro ao atualizar registros: " + data.message);
+                    }
+                },
+                error: function (error) {
+                    alert("Erro ao realizar a requisição: " + error.statusText);
+                }
+            });
+        });
+    });
+</script>
+
+}
+
+
